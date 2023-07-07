@@ -136,7 +136,7 @@ class S2CloudlessBuilder:
         return self
 
     def build(self) -> S2Cloudless:
-        return self.col
+        return self
     
 
 class S2CloudlessDirector:
@@ -154,9 +154,9 @@ class S2CloudlessDirector:
     def build(self, cld_prb_thresh: int = 50, nir_drk_thresh: float = 0.15, cld_prj_dist =1,
               buffer: int = 50) -> S2Cloudless:
         self._builder\
-            .add_cloud_bands(cloud_prob_thresh=cld_prb_thresh)\
-            .add_shadow_bands()\
-            .add_cld_shdw_mask()\
+            .add_cloud_bands(cld_prb_thresh=cld_prb_thresh)\
+            .add_shadow_bands(nir_drk_thresh=nir_drk_thresh, cld_prb_thresh=cld_prj_dist)\
+            .add_cld_shdw_mask(buffer=buffer)\
             .apply_cld_shdw_mask()\
             .build()
 
